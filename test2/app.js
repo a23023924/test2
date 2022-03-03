@@ -27,50 +27,59 @@ while (true) {
 
 console.log(elicitation);
 
-//}
+elicitation = ["黑桃9", "黑桃K", "黑桃10", "黑桃Q", "黑桃J"];
+straight_flush();
+//是否有牌型
 
+function straight_flush() {
+    var repeat = 0;//同花順
 
-
-
-elicitation = ["黑桃A", "黑桃2", "黑桃3", "黑桃4", "黑桃K"];
-//while (true) {//是否有牌型
-var repeat = 0;//同花順
-
-//取出花色
-for (let j = 1; j < 5; j++) {
-    if (elicitation[0].substr(0, 2) == elicitation[j].substr(0, 2)) {
-        repeat++;
-    }
-}
-
-//取出數字
-if (repeat == 4) {
-    console.log(repeat);
-    var num = [5];
-    for (let i = 0; i < 5; i++) {
-        switch (elicitation[i].substr(2, 1)) {
-            case 'A':
-                num[i] = "1";
-                break;
-            case 'J':
-                num[i] = "11";
-                break;
-            case 'Q':
-                num[i] = "12";
-                break;
-            case 'K':
-                num[i] = "13";
-                break;
-            default:
-                num[i] = elicitation[i].substr(2, 1);
+    //取出花色
+    for (let j = 1; j < 5; j++) {
+        if (elicitation[0].substr(0, 2) == elicitation[j].substr(0, 2)) {
+            repeat++;
         }
     }
-    for (let i = 0; i < 5; i++) {
-        number
 
+    //取出數字
+    if (repeat == 4) {
+        var num = [5];
+        for (let i = 0; i < 5; i++) {
+            switch (elicitation[i].substr(2, 2)) {//取得數字
+                case 'A':
+                    num[i] = "1";
+                    break;
+                case 'J':
+                    num[i] = "11";
+                    break;
+                case 'Q':
+                    num[i] = "12";
+                    break;
+                case 'K':
+                    num[i] = "13";
+                    break;
+                case '10':
+                    num[i] = "10";
+                    break;
+                default:
+                    num[i] = elicitation[i].substr(2, 1);
+            }
+        }
+        for (let i = 0; i < 5; i++)num[i] = Number(num[i]);//轉為INT
+
+        console.log(num.sort(function (a, b) {//進行正序
+            return a - b;
+        }));
+
+        let amount = 0;
+        for (let i = 0; i < 5; i++) {//判斷是否連號
+            if (num[i] + 1 == num[i + 1])
+                amount++;
+        }
+        if (amount == 4) console.log("同花順");
     }
-    console.log(num);
 }
 
 
-console.log("1231")
+
+console.log("1231");
